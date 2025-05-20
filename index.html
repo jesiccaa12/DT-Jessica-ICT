@@ -1,26 +1,25 @@
-<!--Reinaldo-->
+<!--Dikerjakan oleh Rania-->
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="style.css" />
-    <title>Photobooth</title>
-    <link rel="icon" type="image" href="Logo.ico">
-
-  </head>
-</html>
-<html>
-  <body>
-    <div class="container">
-      <img src="logo.png" class ="logo"/>
-      <h1>Photobooth</h1>
-      <video id="video" autoplay></video>
-      <div class="controls">
-        <input type="number" id="timer" min="0" placeholder="Timer (Sec)" />
-        <button id="capture-btn">Capture</button>
-      </div>
-      <div id="photos"></div>
-    </div>
-    <script src="script.js">
-    </script>
-  </body>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Homepage</title>
+	<link rel="stylesheet" type="text/css" href="style.css"> <!--Untuk melink ke CSS-->
+	<link rel="icon" type="image" href="Logo.ico">
+</head>
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--Untuk melink ke sweet alert-->
+	<script src="script.js" defer></script> <!--Untuk melink ke JavaScript-->
+	<label id="darkmode" class="switch"><input type="checkbox"><span>Mode Gelap</span></label> <!--Memunculkan checkbox darkmode-->
+	<center>
+		<div class="container">
+			<img src="Logo.png" class="logo"> <!--Untuk memunculkan logo-->
+			<h1>Selamat Datang di Website Kami</h1>
+			<button onclick="hacking()">Hacking</button> <!--Untuk memunculkan Button ke hacking-->
+			<button onclick="photobooth()">Photobooth</button> <!--Untuk memunculkan Button ke photobooth-->
+			<button onclick="gallery()">Gallery</button> <!--Untuk memunculkan Button ke Gallery-->
+		</div>
+	</center>
+</body>
 </html>

@@ -1,61 +1,89 @@
-var video = document.getElementById("video");
-      var captureBtn = document.getElementById("capture-btn");
-      var photosContainer = document.getElementById("photos");
-      var timerInput = document.getElementById("timer");
+// Dikerjakan oleh Rania
 
-      // Mengakses kamera
-      navigator.mediaDevices.getUserMedia({ video: true }).then((mediaDevices) => {
-        video.srcObject = mediaDevices;
-      });
+// Membuat popup pada awal web
+Swal.fire({
+	imageUrl:"Foto kelompok.jpg",
+	imageWidth: 400,
+	imageHeight: 300,
+	showCloseButton:"true",
+	title:"Selamat Datang",
+	text:"Terima kasih telah mengunjungi website kami!",
+	confirmButtonText:"Tutup"
+});
 
-      // Jika menangkap foto menggunakan timer
-      captureBtn.addEventListener("click", () => {
-        var timer = timerInput.value - 1;
-        if (timer > 0) {
-          captureBtn.disabled = true;
-          var countdown = setInterval(() => {
-            captureBtn.textContent = `Capture (${timer})`;
-            if (timer <= 0) {
-              clearInterval(countdown);
-              captureBtn.textContent = "Capture";
-              captureBtn.disabled = false;
-              capturePhoto();
-            }
-            timer--;
-          }, 1000);
-        } else {
-          capturePhoto();
-        }
-      });
+// Membuat popup setelah memencet tombol Hacking
+function hacking(){
+Swal.fire({
+  title: "Menuju halaman Button Hacking",
+  text: "Anda akan diarahkan ke halaman Button Hacking",
+  icon: "info",
+  confirmButtonText: "Lanjutkan",
+}).then((result) => {
+	if (result.isConfirmed) {
+		window.location.assign("Hacking/index.html");
+	}
+});
+}
 
-      function capturePhoto() {
-        var canvas = document.createElement("canvas");
-        var context = canvas.getContext("2d");
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
+// Membuat popup setelah memencet tombol Photobooth
+function photobooth(){
+Swal.fire({
+  title: "Menuju halaman Photobooth",
+  text: "Anda akan diarahkan ke halaman Photobooth",
+  icon: "info",
+  confirmButtonText: "Lanjutkan",
+}).then((result) => {
+	if (result.isConfirmed) {
+		window.location.assign("Photobooth/index.html");
+	}
+});
+}
 
-        // Mengambil foto dan membuatnya menjadi png
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        var dataURL = canvas.toDataURL("image/png");
+// Membuat popup setelah memencet tombol Gallery
+function gallery(){
+Swal.fire({
+  title: "Menuju halaman Gallery",
+  text: "Anda akan diarahkan ke halaman Gallery",
+  icon: "info",
+  confirmButtonText: "Lanjutkan",
+}).then((result) => {
+	if (result.isConfirmed) {
+		window.location.assign("Gallery/index.html");
+	}
+});
+}
 
-        // Beberapa foto yang sudah di klik
-        var photoDiv = document.createElement("div");
-        photoDiv.classList.add("photo");
 
-        var img = document.createElement("img");
-        img.src = dataURL;
-        photoDiv.appendChild(img);
+// Dikerjakan oleh Gaby
 
-        // Mendownload image
-        var downloadBtn = document.createElement("button");
-        downloadBtn.textContent = "Download";
-        downloadBtn.addEventListener("click", () => {
-          var a = document.createElement("a");
-          a.href = dataURL;
-          a.download = "photo.png";
-          a.click();
-        });
+// Menetapkan variabel dark
+let dark = localStorage.getItem('dark')
+// Menentukan variabel darkmode dengan tombol dengan id ‘darkmode’
+const darkmode = document.getElementById('darkmode')
 
-        photoDiv.appendChild(downloadBtn);
-        photosContainer.appendChild(photoDiv);
-      }
+// Menentukan fungsi enabledark yang menetapkan variabel dark sebagai aktif
+const enabledark = () => {
+	document.body.classList.add('dark')
+	localStorage.setItem('dark','active')
+}
+
+// Menentukan fungsi disable yang menetapkan variabel dark sebagai null dan tidak aktif
+const disabledark = () => {
+	document.body.classList.remove('dark')
+	localStorage.setItem('dark', null)
+}
+
+// Menentukan bahwa jika dark aktif, menjalankan fungsi enabledark
+if (dark === "active") enabledark()
+
+// Menentukan setiap kali tombol darkmode di klik, menjalankan logika berikut
+/*Kalau dark saat di local storage memiliki value yang tidak sama dengan aktif, maka menjalankan fungsi enable dark. 
+Namun, jika value sama dengan aktif, maka menjalankan fungsi disable dark.*/
+darkmode.addEventListener("click", () => {
+	dark = localStorage.getItem('dark')
+	if (dark !== "active"){
+		enabledark()
+	} else{
+		disabledark()
+	}
+})
